@@ -1,0 +1,36 @@
+## built
+*.apk
+*.ap_
+*.aab
+
+## dex VM
+*.dex
+
+## java class
+*.class
+
+## generated
+/bin
+/gen
+
+## local config
+/local.properties
+
+## os browsers
+.DS_Store
+Thumbs.db
+
+## android studio
+*.iml
+.gradle
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
