@@ -7,11 +7,24 @@
     tools:context=".FirstFragment">
 
     <TextView
-        android:id="@+id/textview_first"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView_login"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/hello_first_fragment"
-        app:layout_constraintBottom_toTopOf="@id/button_first"
+        android:layout_marginBottom="1dp"
+        android:text="@string/textView_login"
+        app:layout_constraintBottom_toTopOf="@+id/editText_login"
+        app:layout_constraintStart_toStartOf="@+id/editText_login" />
+
+    <EditText
+        android:id="@+id/editText_login"
+        android:layout_width="210dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="294dp"
+        android:ems="10"
+        android:inputType="text"
+        android:singleLine="true"
+        android:text="@string/editText_login"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -19,10 +32,11 @@
     <Button
         android:id="@+id/button_first"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/next"
+        android:layout_height="0dp"
+        android:layout_marginBottom="60dp"
+        android:text="@string/search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_first" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
