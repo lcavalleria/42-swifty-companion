@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FirstFragment">
+    tools:context=".FirstFragment"
+    tools:visibility="visible">
 
     <TextView
         android:id="@+id/textView_login"
@@ -19,20 +20,20 @@
         android:id="@+id/editText_login"
         android:layout_width="210dp"
         android:layout_height="50dp"
-        android:layout_marginTop="294dp"
+        android:layout_marginTop="300dp"
         android:ems="10"
         android:inputType="text"
+        android:selectAllOnFocus="false"
         android:singleLine="true"
-        android:text="@string/editText_login"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button_first"
+        android:id="@+id/button_search"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="48dp"
         android:layout_marginBottom="60dp"
         android:text="@string/search"
         app:layout_constraintBottom_toBottomOf="parent"
