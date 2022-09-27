@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.lcavalle.switfy_companion.databinding.FragmentFirstBinding
-import java.time.Instant
-import java.util.*
+import java.time.*
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -49,6 +48,6 @@ class FirstFragment : Fragment() {
     }
 
     fun searchStudent(login: String): Student {
-        return Student(login, "Example Student", Date.from(Instant.parse("01/01/1990")))
+        return Student(login, "Example Student", LocalDate.parse("1992-03-25"))
     }
 }
