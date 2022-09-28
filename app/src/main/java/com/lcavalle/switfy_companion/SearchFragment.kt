@@ -5,20 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.lcavalle.switfy_companion.dataClasses.Student
 import com.lcavalle.switfy_companion.databinding.FragmentFirstBinding
+import com.lcavalle.switfy_companion.repositories.StudentRepository
+import com.lcavalle.switfy_companion.viewModels.StudentViewModel
 import java.time.*
+import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class SearchFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val model: StudentViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,8 +42,7 @@ class FirstFragment : Fragment() {
 
         binding.buttonSearch.setOnClickListener {
             val studentLogin = binding.textViewLogin.text.toString()
-            val student = searchStudent(studentLogin)
-            // VIEWMODEL HERE
+            model.fetchStudent(studentLogin)
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }

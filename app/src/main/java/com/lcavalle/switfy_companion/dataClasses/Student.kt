@@ -1,4 +1,4 @@
-package com.lcavalle.switfy_companion
+package com.lcavalle.switfy_companion.dataClasses
 
 import java.time.LocalDate
 
