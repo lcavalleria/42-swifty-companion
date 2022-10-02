@@ -2,22 +2,19 @@ package com.lcavalle.switfy_companion
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.*
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.lcavalle.switfy_companion.databinding.FragmentSecondBinding
-import com.lcavalle.switfy_companion.repositories.StudentRepository
 import com.lcavalle.switfy_companion.viewModels.StudentViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-private const val TAG = "StudentInfoFragment"
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -44,10 +41,10 @@ class StudentInfoFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 model.student.collect { student ->
-                    Log.d(TAG, "student $student")
+                    Log.d(SwiftyCompanion.TAG, "student ${student?.login}")
                     // todo: update the ui
                 }
             }

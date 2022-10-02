@@ -1,6 +1,5 @@
 package com.lcavalle.switfy_companion
 
-import android.app.Application
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,10 +10,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.lcavalle.switfy_companion.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
-
-@HiltAndroidApp
-class SwiftyCompanion : Application()
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {

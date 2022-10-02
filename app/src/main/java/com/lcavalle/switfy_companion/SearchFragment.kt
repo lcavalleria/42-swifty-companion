@@ -1,18 +1,14 @@
 package com.lcavalle.switfy_companion
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.lcavalle.switfy_companion.dataClasses.Student
 import com.lcavalle.switfy_companion.databinding.FragmentFirstBinding
-import com.lcavalle.switfy_companion.repositories.StudentRepository
 import com.lcavalle.switfy_companion.viewModels.StudentViewModel
-import java.time.*
-import javax.inject.Inject
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -41,7 +37,7 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonSearch.setOnClickListener {
-            val studentLogin = binding.textViewLogin.text.toString()
+            val studentLogin = binding.editTextLogin.text.toString()
             model.fetchStudent(studentLogin)
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
@@ -50,9 +46,5 @@ class SearchFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun searchStudent(login: String): Student {
-        return Student(login, "Example Student", LocalDate.parse("1992-03-25"))
     }
 }
