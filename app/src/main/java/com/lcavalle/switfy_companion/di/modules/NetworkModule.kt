@@ -1,7 +1,7 @@
 package com.lcavalle.switfy_companion.di.modules
 
 import com.lcavalle.switfy_companion.dataSources.api42.Api42Interceptor
-import com.lcavalle.switfy_companion.dataSources.api42.Api42Interface
+import com.lcavalle.switfy_companion.dataSources.api42.Api42DataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -20,7 +20,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideApi42DataSource(): Api42Interface {
+    fun provideApi42DataSource(): Api42DataSource {
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
@@ -36,6 +36,6 @@ class NetworkModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
 
-        return retrofit.create(Api42Interface::class.java)
+        return retrofit.create(Api42DataSource::class.java)
     }
 }

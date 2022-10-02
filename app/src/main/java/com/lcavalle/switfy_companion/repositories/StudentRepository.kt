@@ -4,7 +4,7 @@ import android.util.Log
 import com.lcavalle.switfy_companion.Credentials
 import com.lcavalle.switfy_companion.SwiftyCompanion
 import com.lcavalle.switfy_companion.dataSources.api42.AccessTokenResponse
-import com.lcavalle.switfy_companion.dataSources.api42.Api42Interface
+import com.lcavalle.switfy_companion.dataSources.api42.Api42DataSource
 import com.lcavalle.switfy_companion.dataSources.api42.Student
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -12,7 +12,7 @@ import java.time.Instant
 import javax.inject.Inject
 
 class StudentRepository @Inject constructor(
-    private val api: Api42Interface
+    private val api: Api42DataSource
 ) {
     private var clientId = Credentials.UID
     private var clientSecret = Credentials.Secret
@@ -27,7 +27,7 @@ class StudentRepository @Inject constructor(
             Log.d(SwiftyCompanion.TAG, "token requested")
         }
         val student: Student? =
-            api.getStudent(Api42Interface.buildAuthorizationString(token), login)
+            api.getStudent(Api42DataSource.buildAuthorizationString(token), login)
                 .elementAtOrNull(0)
         Log.d(SwiftyCompanion.TAG, student.toString())
         return@withContext student
@@ -35,7 +35,7 @@ class StudentRepository @Inject constructor(
 
     private suspend fun postTokenRequest() = withContext(Dispatchers.IO) {
         val response: AccessTokenResponse =
-            api.postTokenRequest(Api42Interface.grantType, clientId, clientSecret)
+            api.postTokenRequest(Api42DataSource.grantType, clientId, clientSecret)
         token = response.accessToken
         tokenLifespan = response.lifespan
         tokenBirth = response.birth

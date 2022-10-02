@@ -5,7 +5,7 @@ import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-interface Api42Interface {
+interface Api42DataSource {
     /**
      * Will return a list containing only the student of "login" or empty
      */
