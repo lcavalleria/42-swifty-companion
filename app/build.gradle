@@ -46,11 +46,14 @@ dependencies {
     // json parsing
     implementation "com.squareup.moshi:moshi:1.12.0"
     implementation "com.squareup.moshi:moshi-kotlin:1.12.0"
+    implementation 'androidx.databinding:databinding-common:7.1.2'
     // java.time.LocalDate
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     // dagger hilt
     implementation 'com.google.dagger:hilt-android:2.43.2'
     kapt 'com.google.dagger:hilt-compiler:2.43.2'
+    // picasso (load image from url)
+    implementation 'com.squareup.picasso:picasso:2.8'
     // android
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1" // fixes version conflict.

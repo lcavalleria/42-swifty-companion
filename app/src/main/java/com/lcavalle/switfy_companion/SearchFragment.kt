@@ -38,7 +38,7 @@ class SearchFragment : Fragment() {
 
         binding.buttonSearch.setOnClickListener {
             val studentLogin = binding.editTextLogin.text.toString()
-            model.fetchStudent(studentLogin)
+            model.fetchStudentInfo(studentLogin)
             findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
         }
     }

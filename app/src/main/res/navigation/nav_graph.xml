@@ -24,5 +24,17 @@
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_SecondFragment_to_StudentProjects"
+            app:destination="@id/StudentProjects" />
+    </fragment>
+    <fragment
+        android:id="@+id/StudentProjects"
+        android:name="com.lcavalle.switfy_companion.StudentProjects"
+        android:label="fragment_projects"
+        tools:layout="@layout/fragment_student_projects" >
+        <action
+            android:id="@+id/action_StudentProjects_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
     </fragment>
 </navigation>

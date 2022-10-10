@@ -11,6 +11,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import com.lcavalle.switfy_companion.dataSources.api42.Cursus
+import com.lcavalle.switfy_companion.dataSources.api42.ImageLoader
 import com.lcavalle.switfy_companion.databinding.FragmentSecondBinding
 import com.lcavalle.switfy_companion.viewModels.StudentViewModel
 import kotlinx.coroutines.launch
@@ -32,10 +34,8 @@ class StudentInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,14 +44,25 @@ class StudentInfoFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 model.student.collect { student ->
-                    Log.d(SwiftyCompanion.TAG, "student ${student?.login}")
-                    // todo: update the ui
+                    ImageLoader.loadImage(binding.imageView, student?.imageUrl)
+                    student?.cursus?.skills?.forEach { skill: Cursus.Companion.Skill ->
+                        Log.d(
+                            SwiftyCompanion.TAG,
+                            "skill: ${skill.name}, level: ${skill.level}"
+                        )
+                    }
                 }
             }
+            // todo: update the ui
         }
 
-        binding.buttonSecond.setOnClickListener {
+        binding.buttonBackToSearch.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+        }
+
+        binding.buttonProjects.setOnClickListener {
+            model.fetchStudentProjects(0)
+            findNavController().navigate(R.id.action_SecondFragment_to_StudentProjects)
         }
     }
 

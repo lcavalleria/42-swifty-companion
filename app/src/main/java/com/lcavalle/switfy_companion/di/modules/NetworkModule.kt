@@ -1,17 +1,26 @@
 package com.lcavalle.switfy_companion.di.modules
 
+import com.lcavalle.switfy_companion.MainActivity
+import com.lcavalle.switfy_companion.SwiftyCompanion
 import com.lcavalle.switfy_companion.dataSources.api42.Api42Interceptor
 import com.lcavalle.switfy_companion.dataSources.api42.Api42DataSource
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.squareup.picasso.Picasso
+import com.squareup.picasso.PicassoProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.currentCoroutineContext
+import kotlinx.coroutines.withContext
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
+import kotlin.coroutines.coroutineContext
 
 @Module
 @InstallIn(SingletonComponent::class)
