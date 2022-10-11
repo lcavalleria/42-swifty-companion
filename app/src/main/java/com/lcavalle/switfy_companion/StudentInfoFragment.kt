@@ -13,7 +13,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.lcavalle.switfy_companion.dataSources.api42.Cursus
 import com.lcavalle.switfy_companion.dataSources.api42.ImageLoader
-import com.lcavalle.switfy_companion.databinding.FragmentSecondBinding
+import com.lcavalle.switfy_companion.databinding.FragmentStudentInfoBinding
 import com.lcavalle.switfy_companion.viewModels.StudentViewModel
 import kotlinx.coroutines.launch
 
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
  */
 class StudentInfoFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: FragmentStudentInfoBinding? = null
     private val model: StudentViewModel by activityViewModels()
 
     // This property is only valid between onCreateView and
@@ -34,7 +34,7 @@ class StudentInfoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = FragmentStudentInfoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
