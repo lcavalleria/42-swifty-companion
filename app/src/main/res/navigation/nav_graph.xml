@@ -3,38 +3,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    android:label="@string/fragment_student_projects_label"
+    app:startDestination="@id/SearchFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/SearchFragment"
         android:name="com.lcavalle.switfy_companion.SearchFragment"
-        android:label="@string/first_fragment_label"
+        android:label="@string/fragment_search_label"
         tools:layout="@layout/fragment_search">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/StudentInfoFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/StudentInfoFragment"
         android:name="com.lcavalle.switfy_companion.StudentInfoFragment"
-        android:label="@string/second_fragment_label"
+        android:label="@string/fragment_student_info_label"
         tools:layout="@layout/fragment_student_info">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/SearchFragment" />
         <action
             android:id="@+id/action_SecondFragment_to_StudentProjects"
-            app:destination="@id/StudentProjects" />
+            app:destination="@id/StudentProjectsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/StudentProjects"
-        android:name="com.lcavalle.switfy_companion.StudentProjects"
-        android:label="fragment_projects"
-        tools:layout="@layout/fragment_student_projects" >
+        android:id="@+id/StudentProjectsFragment"
+        android:name="com.lcavalle.switfy_companion.StudentProjectsFragment"
+        android:label="@string/fragment_student_projects_label"
+        tools:layout="@layout/fragment_student_projects">
         <action
             android:id="@+id/action_StudentProjects_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            app:destination="@id/StudentInfoFragment" />
     </fragment>
 </navigation>

@@ -1,15 +1,25 @@
 <resources>
-    <string name="app_name">switfy-companion</string>
+    <string name="app_name">Switfy-companion</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">Search Student</string>
-    <string name="second_fragment_label">Student Info</string>
-    <string name="search">Search</string>
-    <string name="back">Back</string>
+    <string name="fragment_search_label">Search Student</string>
+    <string name="fragment_student_info_label">Student Info</string>
+    <string name="fragment_student_projects_label">Projects</string>
 
+    <!-- Buttons -->
+    <string name="btn_search">Search</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_projects">Projects</string>
+    <string name="btn_next_page">&gt;</string>
+    <string name="btn_prev_page">&lt;</string>
+    <!-- TextViews -->
     <string name="textView_login">Login</string>
+    <string name="textView_correction_points">Correction points:</string>
+    <string name="textView_wallet">Wallet:</string>
+    <string name="textView_full_name">Full Name</string>
+    <string name="textView_student_email">student@student.42.fr</string>
+    <string name="textView_skills">Skills</string>
+    <string name="textView_skill">Skill</string>
+    <!-- EditTexts -->
     <string name="editText_login">student</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

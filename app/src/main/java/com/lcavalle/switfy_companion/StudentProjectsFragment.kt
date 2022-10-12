@@ -18,15 +18,14 @@ import kotlinx.coroutines.launch
 /**
  * A simple [Fragment] subclass.
  */
-class StudentProjects : Fragment() {
+class StudentProjectsFragment : Fragment() {
     private var _binding: FragmentStudentProjectsBinding? = null
     private val model: StudentViewModel by activityViewModels()
 
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentStudentProjectsBinding.inflate(inflater, container, false)
         return binding.root
@@ -38,14 +37,11 @@ class StudentProjects : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 model.projects.collect { projects ->
-                    projects.forEach { ptl -> // page to list
-                        Log.d(SwiftyCompanion.TAG, "page: ${ptl.key}")
-                        ptl.value.forEach { sp ->
-                            Log.d(
-                                SwiftyCompanion.TAG,
-                                "project: ${sp.project?.name}, mark: ${sp.finalMark}, status: ${sp.status}, validated? : ${sp.validated}"
-                            )
-                        }
+                    projects.forEach { sp ->
+                        Log.d(
+                            SwiftyCompanion.TAG,
+                            "project: ${sp.project?.name}, mark: ${sp.finalMark}, status: ${sp.status}, validated? : ${sp.validated}"
+                        )
                     }
                 }
             }

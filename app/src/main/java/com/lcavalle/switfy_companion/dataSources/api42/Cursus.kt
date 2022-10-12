@@ -10,7 +10,11 @@ class Cursus(
         class Skill(
             @Json(name = "name") val name: String?,
             @Json(name = "level") val level: Float,
-        )
+        ) {
+            override fun toString(): String {
+                return "name: ${name}, lvl: ${level}"
+            }
+        }
 
     }
 }
