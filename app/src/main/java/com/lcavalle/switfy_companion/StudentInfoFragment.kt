@@ -63,7 +63,7 @@ class StudentInfoFragment : Fragment() {
         }
 
         binding.buttonProjects.setOnClickListener {
-            model.fetchStudentProjects(0)
+            model.fetchStudentProjects(1)
             findNavController().navigate(R.id.action_SecondFragment_to_StudentProjects)
         }
     }

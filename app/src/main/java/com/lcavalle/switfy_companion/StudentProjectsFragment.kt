@@ -11,8 +11,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.lcavalle.switfy_companion.databinding.FragmentStudentProjectsBinding
 import com.lcavalle.switfy_companion.viewModels.StudentViewModel
+import com.lcavalle.switfy_companion.views.StudentProjectAdapter
 import kotlinx.coroutines.launch
 
 /**
@@ -34,16 +36,33 @@ class StudentProjectsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.recyclerViewProjectsList.layoutManager = LinearLayoutManager(context)
+        binding.recyclerViewProjectsList.adapter = StudentProjectAdapter()
+
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 model.projects.collect { projects ->
-                    projects.forEach { sp ->
-                        Log.d(
-                            SwiftyCompanion.TAG,
-                            "project: ${sp.project?.name}, mark: ${sp.finalMark}, status: ${sp.status}, validated? : ${sp.validated}"
-                        )
-                    }
+                    (binding.recyclerViewProjectsList.adapter as StudentProjectAdapter)
+                        .updateProjects(projects)
                 }
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                model.page.collect { page ->
+                    binding.textViewPage.text = page.toString()
+                }
+            }
+        }
+
+        binding.btnNextPage.setOnClickListener {
+            model.fetchStudentProjects(model.page.value + 1)
+        }
+
+        binding.btnPrevPage.setOnClickListener {
+            if (model.page.value > 1) {
+                model.fetchStudentProjects(model.page.value - 1)
             }
         }
 

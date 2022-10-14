@@ -8,6 +8,9 @@ class StudentProject(
     @Json(name = "validated?") val validated: Boolean?,
     @Json(name = "project") val project: Project?
 ) {
+    @Transient
+    val name: String? = project?.name
+
     companion object {
         class Project(
             @Json(name = "name") val name: String?

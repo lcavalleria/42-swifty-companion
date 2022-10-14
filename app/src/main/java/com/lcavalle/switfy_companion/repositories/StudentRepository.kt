@@ -15,11 +15,14 @@ class StudentRepository @Inject constructor(
     private var clientId = Credentials.UID
     private var clientSecret = Credentials.Secret
     private var token: String = ""
-    private var tokenLifespan: Long = 0
-    private var tokenBirth: Long = 0
+    private var tokenExpiresAt: Long = 0
+    private var lastRequestTimestampMs: Long = 0
+    private val requestCooldown: Long = 500 // will be more than that to avoid race condition
 
     suspend fun getStudent(login: String): Student? = withContext(Dispatchers.IO) {
+        if (isRateLimited()) return@withContext null
         updateTokenIfNeeded()
+        lastRequestTimestampMs = Instant.now().toEpochMilli() // to avoid race condition
         val student: Student? =
             api.getStudent(
                 Api42DataSource.buildAuthorizationString(token),
@@ -35,12 +38,15 @@ class StudentRepository @Inject constructor(
             student.cursus = cursus
         }
         Log.d(SwiftyCompanion.TAG, student.toString())
+        lastRequestTimestampMs = Instant.now().toEpochMilli()
         return@withContext student
     }
 
 
-    suspend fun getStudentProjects(studentId: Int, page: Int): List<StudentProject> =
+    suspend fun getStudentProjects(studentId: Int, page: Int): List<StudentProject>? =
         withContext(Dispatchers.IO) {
+            if (isRateLimited()) return@withContext null
+            lastRequestTimestampMs = Instant.now().toEpochMilli() // to avoid race condition
             updateTokenIfNeeded()
             val projects: List<StudentProject> =
                 api.getStudentProjects(
@@ -48,25 +54,28 @@ class StudentRepository @Inject constructor(
                     studentId,
                     page
                 )
+            lastRequestTimestampMs = Instant.now().toEpochMilli()
             return@withContext projects
         }
 
 
     private suspend fun updateTokenIfNeeded() = withContext(Dispatchers.IO) {
-        Log.d(
-            SwiftyCompanion.TAG,
-            "check if token is too old -- Token: $token, now: ${
-                Instant.now().epochSecond
-            }, token expires at: ${tokenBirth + tokenLifespan}"
-        )
-        if (token == "" || Instant.now().epochSecond > tokenBirth + tokenLifespan) {
+        val now = Instant.now().epochSecond
+        if (token == "" || now > tokenExpiresAt) {
             Log.d(SwiftyCompanion.TAG, "no token or expired, getting a new one")
             val response: AccessTokenResponse =
                 api.postTokenRequest(Api42DataSource.grantType, clientId, clientSecret)
             token = response.accessToken
-            tokenLifespan = response.lifespan
-            tokenBirth = response.birth
+            tokenExpiresAt = now + response.expiresIn
             Log.d(SwiftyCompanion.TAG, "token updated")
         }
+    }
+
+    private fun isRateLimited(): Boolean {
+        val now: Long = Instant.now().toEpochMilli()
+        val waitingTime = lastRequestTimestampMs + requestCooldown - now
+        val isRateLimited = waitingTime in 0..requestCooldown
+        if (isRateLimited) Log.d(SwiftyCompanion.TAG, "request is rate limited")
+        return isRateLimited
     }
 }

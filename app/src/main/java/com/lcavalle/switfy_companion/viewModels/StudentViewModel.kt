@@ -23,19 +23,28 @@ class StudentViewModel @Inject constructor(
     private val _projects = MutableStateFlow<List<StudentProject>>(emptyList())
     val projects: StateFlow<List<StudentProject>> = _projects
 
-    private val _page = MutableStateFlow<Int>(0)
+    private val _page = MutableStateFlow(1)
     val page: StateFlow<Int> = _page
 
+    private var isLastPage: Boolean = false
+
     fun fetchStudentInfo(login: String) = viewModelScope.launch {
-        _student.update { repository.getStudent(login) }
+        val student = repository.getStudent(login)
+        if (student != null)
+            _student.update { student }
     }
 
     fun fetchStudentProjects(page: Int) = viewModelScope.launch {
-        _page.update { page }
-        _projects.update {
-            repository.getStudentProjects(
-                studentId = _student.value?.id ?: 0, page = page
-            )
+        val projects = repository.getStudentProjects(
+            studentId = _student.value?.id ?: 0, page = page
+        )
+        if (projects != null) {
+            if (projects.isEmpty()) isLastPage = true
+            else {
+                _page.update { page }
+                _projects.update { projects }
+            }
         }
+
     }
 }
