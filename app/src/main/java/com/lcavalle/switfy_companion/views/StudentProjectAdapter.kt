@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.lcavalle.switfy_companion.R
 import com.lcavalle.switfy_companion.SwiftyCompanion
@@ -37,9 +36,10 @@ class StudentProjectAdapter :
         val project: StudentProject = projects[position]
         holder.nameView.text = project.name
         holder.scoreView.text = project.finalMark.toString()
-        holder.validatedBackground.background =
-            if (project.validated == true) R.color.project_validated.toDrawable()
-            else R.color.project_failed.toDrawable()
+        holder.validatedBackground.setBackgroundResource(
+            if (project.validated == true) R.drawable.project_validated_background
+            else R.drawable.project_failed_background
+        )
     }
 
     override fun getItemCount(): Int {

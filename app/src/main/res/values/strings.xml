@@ -20,6 +20,7 @@
     <string name="textView_student_email">student@student.42.fr</string>
     <string name="textView_skills">Skills</string>
     <string name="textView_skill">Skill</string>
+    <string name="textView_project">Project</string>
     <!-- EditTexts -->
     <string name="editText_login">student</string>
 </resources>
