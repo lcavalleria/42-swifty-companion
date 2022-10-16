@@ -37,7 +37,6 @@ class StudentRepository @Inject constructor(
                 ).elementAtOrNull(0)
             student.cursus = cursus
         }
-        Log.d(SwiftyCompanion.TAG, student.toString())
         lastRequestTimestampMs = Instant.now().toEpochMilli()
         return@withContext student
     }

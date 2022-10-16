@@ -1,5 +1,7 @@
 package com.lcavalle.switfy_companion.viewModels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.lcavalle.switfy_companion.dataSources.api42.Student
@@ -17,8 +19,8 @@ class StudentViewModel @Inject constructor(
     private val repository: StudentRepository
 ) : ViewModel() {
 
-    private val _student = MutableStateFlow<Student?>(Student.Example)
-    val student: StateFlow<Student?> = _student
+    private val _student = MutableLiveData<Student?>(null)
+    val student: LiveData<Student?> = _student
 
     private val _projects = MutableStateFlow<List<StudentProject>>(emptyList())
     val projects: StateFlow<List<StudentProject>> = _projects
@@ -28,10 +30,16 @@ class StudentViewModel @Inject constructor(
 
     private var isLastPage: Boolean = false
 
+    /**
+     * @return true if successful, false if student was updated with Null.
+     */
     fun fetchStudentInfo(login: String) = viewModelScope.launch {
         val student = repository.getStudent(login)
-        if (student != null)
-            _student.update { student }
+        _student.value = student
+    }
+
+    fun resetStudent() = viewModelScope.launch {
+        _student.value = null
     }
 
     fun fetchStudentProjects(page: Int) = viewModelScope.launch {

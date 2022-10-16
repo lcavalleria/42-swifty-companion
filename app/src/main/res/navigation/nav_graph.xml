@@ -13,7 +13,7 @@
         tools:layout="@layout/fragment_search">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/searchFragment_to_StudentInfoFragment"
             app:destination="@id/StudentInfoFragment" />
     </fragment>
     <fragment

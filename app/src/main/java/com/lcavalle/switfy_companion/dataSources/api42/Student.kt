@@ -25,18 +25,4 @@ class Student(
                 "wallet: $wallet\n" +
                 "cursus: $cursus\n"
     }
-
-    companion object {
-        val Example = Student(
-            id = 0,
-            email = "-----@----.--",
-            login = "-----",
-            fullName = "---- ------",
-            imageUrl = "https://------.--/---",
-            correctionPoints = 0,
-            wallet = 0
-        )
-    }
-
-
 }

@@ -24,11 +24,8 @@ import kotlinx.coroutines.launch
 class StudentInfoFragment : Fragment() {
 
     private var _binding: FragmentStudentInfoBinding? = null
-    private val model: StudentViewModel by activityViewModels()
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private val model: StudentViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -45,20 +42,23 @@ class StudentInfoFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                model.student.collect { student ->
-                    binding.textViewStudentLogin.text = student?.login
-                    binding.textViewStudentName.text = student?.fullName
-                    binding.textViewStudentEmail.text = student?.email
-                    binding.textViewCorrectionValue.text = student?.correctionPoints.toString()
-                    binding.textViewWalletValue.text = student?.wallet.toString()
-                    ImageLoader.loadImage(binding.imageView, student?.imageUrl)
-                    (binding.recyclerViewSkills.adapter as SkillsAdapter).updateSkills(student?.cursus?.skills)
+                model.student.observe(viewLifecycleOwner) { student ->
+                    if (student != null) {
+                        binding.textViewStudentLogin.text = student.login
+                        binding.textViewStudentName.text = student.fullName
+                        binding.textViewStudentEmail.text = student.email
+                        binding.textViewCorrectionValue.text = student.correctionPoints.toString()
+                        binding.textViewWalletValue.text = student.wallet.toString()
+                        ImageLoader.loadImage(binding.imageView, student.imageUrl)
+                        (binding.recyclerViewSkills.adapter as SkillsAdapter).updateSkills(student.cursus?.skills)
+                    }
                 }
             }
         }
 
 
         binding.buttonBackToSearch.setOnClickListener {
+            model.resetStudent()
             findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
         }
 
