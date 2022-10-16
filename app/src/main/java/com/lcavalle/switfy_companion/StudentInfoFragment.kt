@@ -59,7 +59,7 @@ class StudentInfoFragment : Fragment() {
 
         binding.buttonBackToSearch.setOnClickListener {
             model.resetStudent()
-            findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+            findNavController().navigate(R.id.action_StudentInfoFragment_to_SearchFragment)
         }
 
         binding.buttonProjects.setOnClickListener {

@@ -44,7 +44,7 @@ class SearchFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 model.student.observe(viewLifecycleOwner) { student ->
                     if (student != null)
-                        findNavController().navigate(R.id.searchFragment_to_StudentInfoFragment)
+                        findNavController().navigate(R.id.action_SearchFragment_to_StudentInfoFragment)
                     else if (isFirstIgnored)
                         Toast.makeText(context, notFoundStr, Toast.LENGTH_SHORT).show()
                     else

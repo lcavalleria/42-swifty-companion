@@ -4,38 +4,53 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     android:label="@string/fragment_student_projects_label"
-    app:startDestination="@id/SearchFragment">
+    app:startDestination="@id/main_navigation">
+    <navigation
+        android:id="@+id/main_navigation"
+        app:startDestination="@id/SearchFragment">
+        <fragment
+            android:id="@+id/SearchFragment"
+            android:name="com.lcavalle.switfy_companion.SearchFragment"
+            android:label="@string/fragment_search_label"
+            tools:layout="@layout/fragment_search">
 
-    <fragment
-        android:id="@+id/SearchFragment"
-        android:name="com.lcavalle.switfy_companion.SearchFragment"
-        android:label="@string/fragment_search_label"
-        tools:layout="@layout/fragment_search">
+            <action
+                android:id="@+id/action_SearchFragment_to_StudentInfoFragment"
+                app:destination="@id/StudentInfoFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/StudentInfoFragment"
+            android:name="com.lcavalle.switfy_companion.StudentInfoFragment"
+            android:label="@string/fragment_student_info_label"
+            tools:layout="@layout/fragment_student_info">
 
+            <action
+                android:id="@+id/action_StudentInfoFragment_to_SearchFragment"
+                app:destination="@id/SearchFragment" />
+            <action
+                android:id="@+id/action_SecondFragment_to_StudentProjects"
+                app:destination="@id/StudentProjectsFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/StudentProjectsFragment"
+            android:name="com.lcavalle.switfy_companion.StudentProjectsFragment"
+            android:label="@string/fragment_student_projects_label"
+            tools:layout="@layout/fragment_student_projects">
+            <action
+                android:id="@+id/action_StudentProjects_to_StudentInfoFragment"
+                app:destination="@id/StudentInfoFragment" />
+        </fragment>
         <action
-            android:id="@+id/searchFragment_to_StudentInfoFragment"
-            app:destination="@id/StudentInfoFragment" />
-    </fragment>
+            android:id="@+id/action_main_navigation_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </navigation>
     <fragment
-        android:id="@+id/StudentInfoFragment"
-        android:name="com.lcavalle.switfy_companion.StudentInfoFragment"
-        android:label="@string/fragment_student_info_label"
-        tools:layout="@layout/fragment_student_info">
-
+        android:id="@+id/settingsFragment"
+        android:name="com.lcavalle.switfy_companion.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings">
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/SearchFragment" />
-        <action
-            android:id="@+id/action_SecondFragment_to_StudentProjects"
-            app:destination="@id/StudentProjectsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/StudentProjectsFragment"
-        android:name="com.lcavalle.switfy_companion.StudentProjectsFragment"
-        android:label="@string/fragment_student_projects_label"
-        tools:layout="@layout/fragment_student_projects">
-        <action
-            android:id="@+id/action_StudentProjects_to_SecondFragment"
-            app:destination="@id/StudentInfoFragment" />
+            android:id="@+id/action_settingsFragment_to_main_navigation"
+            app:destination="@id/main_navigation" />
     </fragment>
 </navigation>

@@ -1,7 +1,6 @@
 package com.lcavalle.switfy_companion
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,7 +66,7 @@ class StudentProjectsFragment : Fragment() {
         }
 
         binding.buttonBackToStudent.setOnClickListener {
-            findNavController().navigate(R.id.action_StudentProjects_to_SecondFragment)
+            findNavController().navigate(R.id.action_StudentProjects_to_StudentInfoFragment)
         }
     }
 }
