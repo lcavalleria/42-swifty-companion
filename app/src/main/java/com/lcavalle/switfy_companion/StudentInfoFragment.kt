@@ -51,6 +51,7 @@ class StudentInfoFragment : Fragment() {
                         binding.textViewWalletValue.text = student.wallet.toString()
                         ImageLoader.loadImage(binding.imageView, student.imageUrl)
                         (binding.recyclerViewSkills.adapter as SkillsAdapter).updateSkills(student.cursus?.skills)
+                        binding.recyclerViewSkills.scrollToPosition(0)
                     }
                 }
             }

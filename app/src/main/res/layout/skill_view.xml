@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/skill_item"
     android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp"
-    android:background="@drawable/skill_background">
+    android:layout_marginBottom="2dp">
 
     <ProgressBar
         android:id="@+id/progressBar_skill_percent"
@@ -15,9 +14,9 @@
         android:layout_height="0dp"
         android:indeterminate="false"
         android:max="100"
-        android:progressBackgroundTint="#FFFFFF"
+        android:progressBackgroundTint="#30ffffff"
         android:progressDrawable="@android:drawable/progress_horizontal"
-        android:progressTint="#91A9D0"
+        android:progressTint="#5091A9D0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

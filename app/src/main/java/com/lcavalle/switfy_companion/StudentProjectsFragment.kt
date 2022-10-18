@@ -43,6 +43,7 @@ class StudentProjectsFragment : Fragment() {
                 model.projects.collect { projects ->
                     (binding.recyclerViewProjectsList.adapter as StudentProjectAdapter)
                         .updateProjects(projects)
+                    binding.recyclerViewProjectsList.scrollToPosition(0)
                 }
             }
         }
