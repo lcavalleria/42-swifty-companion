@@ -19,8 +19,8 @@ class StudentViewModel @Inject constructor(
     private val repository: StudentRepository
 ) : ViewModel() {
 
-    private val _student = MutableLiveData<Student?>(null)
-    val student: LiveData<Student?> = _student
+    private val _student = MutableLiveData<Result<Student?>>(Result.success(null))
+    val student: LiveData<Result<Student?>> = _student
 
     private val _projects = MutableStateFlow<List<StudentProject>>(emptyList())
     val projects: StateFlow<List<StudentProject>> = _projects
@@ -34,17 +34,18 @@ class StudentViewModel @Inject constructor(
      * @return true if successful, false if student was updated with Null.
      */
     fun fetchStudentInfo(login: String) = viewModelScope.launch {
-        val student = repository.getStudent(login)
-        _student.value = student
+        val result = repository.getStudent(login)
+        _student.value = result
     }
 
     fun resetStudent() = viewModelScope.launch {
-        _student.value = null
+        _student.value = Result.success(null)
     }
 
     fun fetchStudentProjects(page: Int) = viewModelScope.launch {
         val projects = repository.getStudentProjects(
-            studentId = _student.value?.id ?: 0, page = page
+            // this will never be called with _student.value? being null
+            studentId = _student.value?.getOrNull()?.id ?: 0, page = page
         )
         if (projects != null) {
             if (projects.isEmpty()) isLastPage = true

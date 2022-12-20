@@ -42,14 +42,15 @@ class StudentInfoFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                model.student.observe(viewLifecycleOwner) { student ->
+                model.student.observe(viewLifecycleOwner) { studentResult ->
+                    val student = studentResult.getOrNull() // will never be null
                     if (student != null) {
                         binding.textViewStudentLogin.text = student.login
                         binding.textViewStudentName.text = student.fullName
                         binding.textViewStudentEmail.text = student.email
                         binding.textViewCorrectionValue.text = student.correctionPoints.toString()
                         binding.textViewWalletValue.text = student.wallet.toString()
-                        ImageLoader.loadImage(binding.imageView, student.imageUrl)
+                        ImageLoader.loadImage(binding.imageView, student.imageLink)
                         (binding.recyclerViewSkills.adapter as SkillsAdapter).updateSkills(student.cursus?.skills)
                         binding.recyclerViewSkills.scrollToPosition(0)
                     }

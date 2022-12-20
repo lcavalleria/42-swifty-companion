@@ -19,9 +19,10 @@ class StudentRepository @Inject constructor(
     private var lastRequestTimestampMs: Long = 0
     private val requestCooldown: Long = 500 // will be more than that to avoid race condition
 
-    suspend fun getStudent(login: String): Student? = withContext(Dispatchers.IO) {
-        if (isRateLimited()) return@withContext null
-        updateTokenIfNeeded()
+    suspend fun getStudent(login: String): Result<Student?> = withContext(Dispatchers.IO) {
+        if (isRateLimited()) return@withContext Result.success(null)
+        kotlin.runCatching { updateTokenIfNeeded() }
+            .onFailure { return@withContext Result.failure(it) }
         lastRequestTimestampMs = Instant.now().toEpochMilli() // to avoid race condition
         val student: Student? =
             api.getStudent(
@@ -38,7 +39,7 @@ class StudentRepository @Inject constructor(
             student.cursus = cursus
         }
         lastRequestTimestampMs = Instant.now().toEpochMilli()
-        return@withContext student
+        return@withContext Result.success(student)
     }
 
 
