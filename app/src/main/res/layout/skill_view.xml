@@ -4,8 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="@dimen/skill_item"
-    android:layout_marginTop="2dp"
-    android:layout_marginBottom="2dp">
+    android:layout_centerInParent="false"
+    android:layout_centerVertical="true"
+    android:layout_margin="5dp"
+    android:foregroundGravity="center_vertical"
+    app:layout_anchorGravity="center_vertical">
 
     <ProgressBar
         android:id="@+id/progressBar_skill_percent"
@@ -14,9 +17,9 @@
         android:layout_height="0dp"
         android:indeterminate="false"
         android:max="100"
-        android:progressBackgroundTint="#30ffffff"
+        android:progressBackgroundTint="@color/app_2"
         android:progressDrawable="@android:drawable/progress_horizontal"
-        android:progressTint="#5091A9D0"
+        android:progressTint="@color/progress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,29 +30,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:foregroundGravity="center_vertical|center|center_horizontal"
+        android:gravity="center|center_horizontal|center_vertical"
         android:text="@string/textView_skill"
         android:textAlignment="textStart"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:flow_horizontalAlign="start"
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView_skill_level"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:foregroundGravity="center_vertical|center|center_horizontal"
+        android:gravity="center|center_horizontal|center_vertical"
         android:text="0"
         android:textAlignment="textEnd"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:flow_horizontalAlign="end"
         app:flow_verticalAlign="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

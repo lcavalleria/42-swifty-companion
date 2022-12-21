@@ -9,6 +9,8 @@ class Student(
     @Json(name = "usual_full_name") val fullName: String? = "",
     @Json(name = "image") val image: StudentImage? = StudentImage(),
     @Json(name = "correction_point") val correctionPoints: Int = 0,
+    @Json(name = "pool_year") val poolYear: String? = "-",
+    @Json(name = "pool_month") val poolMonth: String? = "-",
     @Json(name = "wallet") val wallet: Int = 0
 ) {
 
@@ -28,6 +30,8 @@ class Student(
                 "name: $fullName\n" +
                 "imageLink: $imageLink\n" +
                 "correctionPoints: $correctionPoints\n" +
+                "poolYear: $poolYear\n" +
+                "poolMonth: $poolMonth\n" +
                 "wallet: $wallet\n" +
                 "cursus: $cursus\n"
     }

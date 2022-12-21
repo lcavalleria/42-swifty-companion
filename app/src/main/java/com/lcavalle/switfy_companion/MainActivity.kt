@@ -42,7 +42,11 @@ class MainActivity : AppCompatActivity() {
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
             R.id.action_settings -> {
-                findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_main_navigation_to_settingsFragment)
+                try {
+                    findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_main_navigation_to_settingsFragment)
+                } catch (_: java.lang.IllegalArgumentException) {
+                    // do nothing
+                }
                 true
             }
             else -> super.onOptionsItemSelected(item)

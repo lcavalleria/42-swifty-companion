@@ -14,8 +14,9 @@
     <string name="btn_prev_page">&lt;</string>
     <!-- TextViews -->
     <string name="textView_login">Login</string>
-    <string name="textView_correction_points">Correction points:</string>
-    <string name="textView_wallet">Wallet:</string>
+    <string name="textView_correction_points">Correction points</string>
+    <string name="textView_pool_date">Pool date:</string>
+    <string name="textView_wallet">Wallet</string>
     <string name="textView_full_name">Full Name</string>
     <string name="textView_student_email">student@student.42.fr</string>
     <string name="textView_skills">Skills</string>

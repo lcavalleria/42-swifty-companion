@@ -45,11 +45,13 @@ class StudentInfoFragment : Fragment() {
                 model.student.observe(viewLifecycleOwner) { studentResult ->
                     val student = studentResult.getOrNull() // will never be null
                     if (student != null) {
+                        val poolDateStr = student.poolMonth + " " + student.poolYear
                         binding.textViewStudentLogin.text = student.login
                         binding.textViewStudentName.text = student.fullName
                         binding.textViewStudentEmail.text = student.email
                         binding.textViewCorrectionValue.text = student.correctionPoints.toString()
                         binding.textViewWalletValue.text = student.wallet.toString()
+                        binding.textViewPoolDateValue.text = poolDateStr
                         ImageLoader.loadImage(binding.imageView, student.imageLink)
                         (binding.recyclerViewSkills.adapter as SkillsAdapter).updateSkills(student.cursus?.skills)
                         binding.recyclerViewSkills.scrollToPosition(0)

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="card">#202020</color>
+    <color name="progress">#506080</color>
+    <color name="app_1">#303030</color>
+    <color name="app_2">#101010</color>
+    <color name="app_3">#505050</color>
+</resources>
